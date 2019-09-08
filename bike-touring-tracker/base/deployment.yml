@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: btt
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: btt
+  template:
+    spec:
+      containers:
+      - name: btt
+        image: phillebaba/bike-touring-tracker:master
+        imagePullPolicy: Always
+        command: ["/bin/bike-touring-tracker"]
+        args:
+          - "-postgres-host=$(POSTGRES_SERVICE)"
+          - "-postgres-password=$(DB_PASSWORD)"
+          - "-admin-password=$(ADMIN_PASSWORD)"
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: db-password
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: btt
+              key: admin-password
+        - name: GIN_MODE
+          value: "release"
+        - name: PORT
+          value: "80"
+        ports:
+        - containerPort: 80
