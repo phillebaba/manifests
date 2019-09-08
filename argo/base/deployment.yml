@@ -24,7 +24,7 @@ spec:
         - "20"
         - --operation-processors
         - "10"
-        image: phillebaba/argo-cd:latest
+        image: argoproj/argocd:latest
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -64,8 +64,7 @@ spec:
       - command:
         - /shared/argocd-util
         - rundex
-        image: cyrilix/dex
-        #image: quay.io/dexidp/dex:v2.14.0
+        image: quay.io/dexidp/dex:v2.14.0
         imagePullPolicy: Always
         name: dex
         ports:
@@ -79,7 +78,7 @@ spec:
         - cp
         - /usr/local/bin/argocd-util
         - /shared
-        image: phillebaba/argo-cd:latest
+        image: argoproj/argocd:latest
         imagePullPolicy: Always
         name: copyutil
         volumeMounts:
@@ -142,7 +141,7 @@ spec:
         - argocd-repo-server
         - --redis
         - argocd-redis:6379
-        image: phillebaba/argo-cd:latest
+        image: argoproj/argocd:latest
         imagePullPolicy: Always
         livenessProbe:
           initialDelaySeconds: 5
@@ -193,8 +192,7 @@ spec:
         - argocd-server
         - --staticassets
         - /shared/app
-        - --insecure
-        image: phillebaba/argo-cd:latest
+        image: argoproj/argocd:latest
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
