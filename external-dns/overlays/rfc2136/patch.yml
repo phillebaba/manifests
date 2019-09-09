@@ -8,6 +8,8 @@ spec:
       containers:
       - name: external-dns
         args:
+          - --source=service
+          - --source=ingress
           - --provider=rfc2136
           - --rfc2136-host=123.123.123.123
           - --rfc2136-port=53
