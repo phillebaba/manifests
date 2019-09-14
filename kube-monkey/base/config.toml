@@ -1,0 +1,5 @@
+[kubemonkey]
+run_hour = 8
+start_hour = 10
+end_hour = 16
+blacklisted_namespaces = ["kube-system"]
