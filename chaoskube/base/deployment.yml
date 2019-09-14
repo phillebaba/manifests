@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: chaoskube
-        image: quay.io/linki/chaoskube:v0.13.0
+        image: quay.io/linki/chaoskube:v0.15.1
         args:
         - --interval=10m
         - --namespaces=!kube-system
