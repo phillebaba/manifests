@@ -6,7 +6,3 @@ before_install:
   - chmod u+x kubeval
 script:
   - ./kubeval --strict --ignore-missing-schemas -d $(ls -1d ./*/ | paste -sd ',')
-env:
-  - KUBERNETES_VERSION="master"
-  - KUBERNETES_VERSION="1.8.1"
-  - KUBERNETES_VERSION="1.7.5"
