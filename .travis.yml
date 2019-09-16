@@ -1,0 +1,12 @@
+language: C
+sudo: false
+before_install:
+  - wget https://github.com/instrumenta/kubeval/releases/download/0.14.0/kubeval-linux-amd64.tar.gz
+  - tar xzvf kubeval-linux-amd64.tar.gz
+  - chmod u+x kubeval
+script:
+  - ./kubeval --strict --ignore-missing-schemas -d $(ls -1d ./*/ | paste -sd ',')
+env:
+  - KUBERNETES_VERSION="master"
+  - KUBERNETES_VERSION="1.8.1"
+  - KUBERNETES_VERSION="1.7.5"
