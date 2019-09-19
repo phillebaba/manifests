@@ -3,7 +3,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: metrics-server
-  namespace: kube-system
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,16 +27,8 @@ spec:
         emptyDir: {}
       containers:
       - name: metrics-server
-        command:
-        - /metrics-server
-        - --logtostderr
-        # - --v=2
-        # - --metric-resolution=10s
-        - --kubelet-insecure-tls
-        - --kubelet-preferred-address-types=InternalIP
-        image: k8s.gcr.io/metrics-server-arm:v0.3.2
+        image: k8s.gcr.io/metrics-server-amd64:v0.3.4
         imagePullPolicy: Always
         volumeMounts:
         - name: tmp-dir
           mountPath: /tmp
-

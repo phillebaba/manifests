@@ -8,3 +8,17 @@ resources:
   - metrics-server-deployment.yaml
   - metrics-server-service.yaml
   - resource-reader.yaml
+
+namespace: kube-system
+
+configurations:
+- ./kustomizeconfig/varreference.yml
+
+vars:
+- name: SERVICE_NAMESPACE
+  objref:
+    kind: Service
+    name: metrics-server
+    apiVersion: v1
+  fieldref:
+    fieldpath: metadata.namespace
