@@ -6,3 +6,6 @@ resources:
   - rolebinding.yml
   - serviceaccount.yml
   - storageclass.yml
+
+configurations:
+- ./kustomizeconfig/varreference.yml

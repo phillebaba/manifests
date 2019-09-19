@@ -5,4 +5,4 @@ before_install:
   - tar xzvf kubeval-linux-amd64.tar.gz
   - chmod u+x kubeval
 script:
-  - ./kubeval --strict --ignore-missing-schemas -d $(ls -1d ./*/ | paste -sd ',')
+  - find . -name "*.yaml" -o -name "*.yml" | grep -v -E ".travis.yml|kustomizeconfig" | while read line; do ./kubeval --strict  --ignore-missing-schemas -o tap $line; done

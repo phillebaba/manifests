@@ -15,7 +15,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: nfs-server
-        image: itsthenetwork/nfs-server-alpine:11-arm
+        image: itsthenetwork/nfs-server-alpine:latest
         env:
         - name: SHARED_DIRECTORY
           value: /mnt/nfs
@@ -33,5 +33,3 @@ spec:
         hostPath:
           path: /mnt/nfs
           type: Directory
-      nodeSelector:
-        node-role.kubernetes.io/nfs: "true"

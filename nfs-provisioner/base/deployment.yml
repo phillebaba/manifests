@@ -17,7 +17,7 @@ spec:
       serviceAccountName: nfs-client-provisioner
       containers:
         - name: nfs-client-provisioner
-          image: quay.io/external_storage/nfs-client-provisioner-arm:latest
+          image: quay.io/external_storage/nfs-client-provisioner:latest
           volumeMounts:
             - name: nfs-client-root
               mountPath: /persistentvolumes
@@ -25,15 +25,11 @@ spec:
             - name: PROVISIONER_NAME
               value: fuseim.pri/ifs
             - name: NFS_SERVER
-              value: 10.43.118.159
+              value: $(NFS_SERVER)
             - name: NFS_PATH
               value: /
-      nodeSelector:
-        node-role.kubernetes.io/nfs: "true"
       volumes:
-        - name: nfs-client-root
-          nfs:
-            server: 10.43.118.159
-            # cant use service name as dns
-            # https://github.com/kubernetes/minikube/issues/3417
-            path: / # this has to be single slash
+      - name: nfs-client-root
+        nfs:
+          server: $(NFS_SERVER)
+          path: /
