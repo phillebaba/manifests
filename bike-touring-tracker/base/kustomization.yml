@@ -4,6 +4,5 @@ resources:
   - secret.yml
   - service.yml
   - deployment.yml
-  - ingress.yml
 commonLabels:
   app: btt
