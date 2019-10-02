@@ -1,20 +1,18 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: traefik-ingress-service
-  labels:
-    k8s-app: traefik
+  name: traefik
+
 spec:
-  selector:
-    k8s-app: traefik-ingress-lb
   ports:
     - protocol: TCP
-      port: 80
-      name: http
+      name: web
+      port: 8000
     - protocol: TCP
-      port: 443
-      name: https
-    - protocol: TCP
-      port: 8080
       name: admin
-  type: LoadBalancer
+      port: 8080
+    - protocol: TCP
+      name: websecure
+      port: 4443
+  selector:
+    app: traefik
