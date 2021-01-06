@@ -1,9 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: node-feature-discovery
-
 resources:
-- daemonset.yml
-- rbac.yml
-- service.yml
+- daemonset.yaml
+- deployment.yaml
+- rbac.yaml
+- service.yaml
+configMapGenerator:
+- name: nfd-worker-conf
+  files:
+  - nfd-worker.conf
