@@ -1,0 +1,7 @@
+resources:
+- admission-webhook.yaml
+- configmap.yaml
+- deployment.yaml
+- namespace.yaml
+- rbac.yaml
+- service.yaml
