@@ -19,6 +19,8 @@ spec:
         env:
         - name: NFS_DIR
           value: /mnt/nfs
+        - name: NFS_OPTION
+          value: fsid=0,rw,sync,insecure,all_squash,anonuid=65534,anongid=65534,no_subtree_check,nohide
         ports:
           - name: nfs
             containerPort: 2049
