@@ -23,8 +23,8 @@ spec:
           - name: nfs
             containerPort: 2049
             protocol: TCP
-        #securityContext:
-        #  privileged: true
+        securityContext:
+          privileged: true
         volumeMounts:
         - name: nfs-volume
           mountPath: /mnt/nfs
