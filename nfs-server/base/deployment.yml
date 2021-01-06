@@ -15,16 +15,16 @@ spec:
       restartPolicy: Always
       containers:
       - name: nfs-server
-        image: itsthenetwork/nfs-server-alpine:latest
+        image: gists/nfs-server:2.4.3
         env:
-        - name: SHARED_DIRECTORY
+        - name: NFS_DIR
           value: /mnt/nfs
         ports:
           - name: nfs
             containerPort: 2049
             protocol: TCP
-        securityContext:
-          privileged: true
+        #securityContext:
+        #  privileged: true
         volumeMounts:
         - name: nfs-volume
           mountPath: /mnt/nfs
