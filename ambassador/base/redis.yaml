@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ambassador-redis
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    service: ambassador-redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ambassador-redis
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: ambassador-redis
+  template:
+    metadata:
+      labels:
+        service: ambassador-redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:5.0.1
+      restartPolicy: Always

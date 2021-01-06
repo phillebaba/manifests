@@ -1,0 +1,49 @@
+apiVersion: getambassador.io/v2
+kind: RateLimitService
+metadata:
+  name: ambassador-edge-stack-ratelimit
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  service: "127.0.0.1:8500"
+---
+apiVersion: getambassador.io/v2
+kind: AuthService
+metadata:
+  name: ambassador-edge-stack-auth
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  proto: grpc
+  status_on_error:
+    code: 504
+  auth_service: "127.0.0.1:8500"
+  allow_request_body: false # setting this to 'true' allows Plugin and External filters to access the body, but has performance overhead
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  # This Mapping name is referenced by convention, it's important to leave as-is.
+  name: ambassador-devportal
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  prefix: /docs/
+  rewrite: "/docs/"
+  service: "127.0.0.1:8500"
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  # This Mapping name is referenced by convention, it's important to leave as-is.
+  name: ambassador-devportal-api
+  namespace: ambassador
+  labels:
+    product: aes
+spec:
+  prefix: /openapi/
+  rewrite: ""
+  service: "127.0.0.1:8500"
